@@ -1,0 +1,6 @@
+[submodule "flogo/lsp"]
+	path = extensions/flogo/lsp
+	url = git@github.com:clint-ide/flogo-lsp.git
+[submodule "flogo/theia-extension"]
+	path = extensions/flogo/theia-extension
+	url = git@github.com:clint-ide/theia-flogo-extension.git

@@ -1,0 +1,157 @@
+{
+  "name": "simpleApp",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "appModel": "1.0.0",
+  "description": "My flogo application description",
+  "imports": [
+    "github.com/project-flogo/flow",
+    "github.com/project-flogo/contrib/trigger/rest",
+    "github.com/project-flogo/contrib/activity/log"
+  ],
+  "triggers": [
+    {
+      "id": "my_rest_trigger1",
+      "ref": "#rest",
+      "settings": {
+        "port": "9233"
+      }
+    },
+    {
+      "id": "my_rest_trigger",
+      "ref": "#rest",
+      "settings": {
+        "port": "9233"
+      },
+      "handlers": [
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/test"
+          },
+          "action": {
+            "ref": "#flow",
+            "settings": {
+              "flowURI": "res://flow:myflow"
+            },
+            "input": {
+              "orderType": "standard"
+            },
+            "output": {
+              "data": "=$.value"
+            }
+          }
+        },
+        {
+          "settings": {
+            "method": "GET",
+            "path": "/test2"
+          },
+          "actions": [
+            {
+              "if": "$.headers.Foo == \"bar\"",
+              "id": "sharedAction",
+              "input": {
+                "orderType": "bar"
+              },
+              "output": {
+                "data": "=$.value"
+              }
+            },
+            {
+              "id": "sharedActionDefault",
+              "input": {
+                "orderType": "foo"
+              },
+              "output": {
+                "data": "fixed"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "actions":[
+    {
+      "id" : "sharedAction",
+      "ref": "#flow",
+      "settings": {
+        "flowURI": "res://flow:myflow"
+      }
+    },
+    {
+      "id" : "sharedActionDefault",
+      "ref": "#flow",
+      "settings": {
+        "flowURI": "res://flow:myflow"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:myflow",
+      "data": {
+        "name": "My Flow",
+        "description": "Example description",
+        "metadata": {
+          "input": [
+            { "name":"customerId", "type":"string" },
+            { "name":"orderId", "type":"string" },
+            { "name":"orderType", "type":"string" }
+          ],
+          "output":[
+            { "name":"value", "type":"string" }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "FirstLog",
+            "name": "FirstLog",
+            "type": "iterator",
+            "settings": {
+              "iterate": 10
+            },
+            "activity": {
+              "ref": "#log",
+              "input": {
+                "message": "=$iteration[key]"
+              }
+            }
+          },
+          {
+            "id": "SecondLog",
+            "name": "SecondLog",
+            "activity" : {
+              "ref": "#log",
+              "input": {
+                "message": "test message"
+              }
+            }
+          }
+        ],
+        "links": [
+          {
+            "from": "FirstLog",
+            "to": "SecondLog",
+            "type": "expression",
+            "value": "$flow.orderId > 1000"
+          }
+        ],
+        "errorHandler": {
+          "tasks": [
+            {
+              "id": "ErrorLog",
+              "activity": {
+                "ref": "#log",
+                "input": {
+                  "message": "log in error handler"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

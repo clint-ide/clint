@@ -1,0 +1,17 @@
+electronVersion: 3.1.7
+
+productName: Clint IDE
+appId: clint.ide
+
+asar: false
+directories:
+  buildResources: resources
+files:
+  - 'src-gen/**/*'
+  - 'lib/**/*'
+  - 'node_modules/**/*'
+  - package.json
+
+win:
+  target:
+    - nsis

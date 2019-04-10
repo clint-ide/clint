@@ -1,0 +1,11 @@
+image:
+  file: .gitpod.dockerfile
+ports:
+  - port: 3000
+tasks:
+  - init: >
+      ./extensions/flogo/lsp/gradlew -b ./extensions/flogo/lsp/build.gradle build &&
+      nvm install 10 && nvm use 10 && npm install -g yarn && yarn
+    command: >
+      yarn --cwd ide/web start /workspace/clint-ide/workspace
+

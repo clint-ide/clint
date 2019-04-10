@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "@clint-ide/ide-dev",
+  "version": "0.0.0",
+  "dependencies": {
+    "@theia/editor": "1.0.0",
+    "@theia/preferences": "1.0.0",
+    "@clint-ide/flogo-language": "0.0.0",
+    "@clint-ide/flogo-diagrams": "0.0.0",
+    "@clint-ide/flogo-getting-started": "0.0.0"
+  },
+  "devDependencies": {
+    "@theia/cli": "1.0.0"
+  },
+  "scripts": {
+    "prepare": "theia build --mode development",
+    "start": "theia start",
+    "watch": "theia build --watch --mode development",
+    "start:debug": "node --inspect ./src-gen/backend/main.js --root-dir=../../workspace --FLOGO_LSP=5008 --port=3000 --loglevel=debug"
+  },
+  "theia": {
+    "target": "browser",
+    "frontend": {
+      "config": {
+        "applicationName": "Cloud Integration IDE"
+      }
+    }
+  }
+}
