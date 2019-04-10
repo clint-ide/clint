@@ -1,0 +1,9 @@
+ports:
+  - port: 3000
+tasks:
+  - init: >
+      ./flogo/lsp/gradlew -b ./flogo/lsp/build.gradle build &&
+      nvm install 10 && nvm use 10 && yarn
+    command: >
+      yarn --cwd browser-app start /workspace/clint-ide/flogo/workspace
+

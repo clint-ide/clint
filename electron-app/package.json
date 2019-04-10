@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "clint-ide-desktop",
+  "version": "0.0.0",
+  "dependencies": {
+    "yargs": "^13.2.2",
+    "xterm": "^3.12.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^20.30.0"
+  },
+  "scripts": {
+    "prepare": "theia build --mode development",
+    "start": "theia start",
+    "watch": "theia build --watch --mode development",
+    "build": "theia build",
+    "package": "yarn run build && electron-builder",
+    "package:all": "yarn run build && electron-builder -lmw"
+  },
+  "theia": {
+    "target": "electron",
+    "frontend": {
+      "config": {
+        "applicationName": "Cloud Integration IDE"
+      }
+    }
+
+  }
+}

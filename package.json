@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "scripts": {
+    "prepare": "lerna run prepare",
+    "rebuild:browser": "theia rebuild:browser",
+    "rebuild:electron": "theia rebuild:electron"
+  },
+  "devDependencies": {
+    "lerna": "3.13.2",
+    "@theia/cli": "next"
+  },
+  "workspaces": [
+    "flogo/theia-extension/flogo",
+    "flogo/theia-extension/flogo-diagrams",
+    "browser-app",
+    "electron-app"
+  ],
+  "dependencies": {
+    "@theia/core": "next",
+    "@theia/filesystem": "next",
+    "@theia/workspace": "next",
+    "@theia/preferences": "next",
+    "@theia/navigator": "next",
+    "@theia/process": "next",
+    "@theia/terminal": "next",
+    "@theia/editor": "next",
+    "@theia/languages": "next",
+    "@theia/markers": "next",
+    "@theia/monaco": "next",
+    "@theia/typescript": "next",
+    "@theia/messages": "next",
+    "@theia/getting-started": "next",
+    "vscode-nsfw": "1.1.2",
+    "flogo": "0.0.0"
+  }
+}
+

@@ -1,0 +1,6 @@
+[submodule "flogo/lsp"]
+	path = flogo/lsp
+	url = https://github.com/debovema/flogo-lsp
+[submodule "flogo/theia-extension"]
+	path = flogo/theia-extension
+	url = https://github.com/clint-ide/theia-flogo-extension
